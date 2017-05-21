@@ -34,11 +34,11 @@ class Test(unittest.TestCase):
             # open New -> Data popup, set inputs
             app.root._new_data()
             new_data = app.root.wiz_newdata.ids.container.children[0]
-            new_data.ids.table_name.text = u'NewData' + str(x)
+            new_data.ids.table_name.text = 'NewData' + str(x)
             cols = new_data.ids.columns.children
 
             # set columns for new data
-            range_vals = range(13)
+            range_vals = list(range(13))
             for _ in range(2):
                 new_data.ids.columnadd.dispatch('on_release')
                 cols[0].ids.colname.text += str(len(cols))
@@ -101,9 +101,9 @@ class Test(unittest.TestCase):
 
         # get results and test
         tables = app.root.tables
-        exp_tables = [u'NewData0', u'NewData1', u'NewData2',
-                      u'NewData3', u'NewData0_append_1_rows',
-                      u'NewData2_append_3_cols']
+        exp_tables = ['NewData0', 'NewData1', 'NewData2',
+                      'NewData3', 'NewData0_append_1_rows',
+                      'NewData2_append_3_cols']
 
         # get table list from Task
         taskcls = Manipulate()
@@ -125,19 +125,19 @@ class Test(unittest.TestCase):
         _tables = [tables[4][1], tables[1][1],
                    tables[5][1], tables[3][1]]
         _exp_labels = [
-            [u'Data1 (A)', u'Data2 (B)', u'Data3 (C)', u'Data4 (D)'],
-            [u'Data1 (A)', u'Data2 (B)', u'Data3 (C)', u'Data4 (D)'],
-            [u'Data1 (A)', u'Data2 (B)', u'Data3 (C)', u'Data4 (D)',
-             u'Column0 (E)', u'Column1 (F)', u'Column2 (G)'],
-            [u'Data1 (A)', u'Data2 (B)', u'Data3 (C)', u'Data4 (D)',
-             u'Column0 (E)', u'Column1 (F)', u'Column2 (G)', u'Column3 (H)']
+            ['Data1 (A)', 'Data2 (B)', 'Data3 (C)', 'Data4 (D)'],
+            ['Data1 (A)', 'Data2 (B)', 'Data3 (C)', 'Data4 (D)'],
+            ['Data1 (A)', 'Data2 (B)', 'Data3 (C)', 'Data4 (D)',
+             'Column0 (E)', 'Column1 (F)', 'Column2 (G)'],
+            ['Data1 (A)', 'Data2 (B)', 'Data3 (C)', 'Data4 (D)',
+             'Column0 (E)', 'Column1 (F)', 'Column2 (G)', 'Column3 (H)']
         ]
 
         for i, tbl in enumerate(_tables):
             data = tbl.rv.data
             labels = []
             for d in data:
-                if 'cell' in d.keys():
+                if 'cell' in list(d.keys()):
                     if 'label' in d['cell']:
                         labels.append(d['text'])
             self.assertEqual(labels, _exp_labels[i])

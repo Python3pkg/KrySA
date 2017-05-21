@@ -123,17 +123,17 @@ class Test(unittest.TestCase):
         new_data = app.root.wiz_newdata.run()
 
         # set testing data
-        newdata_values = [[0, u'', 0.0],
-                          [0, u'', 0.0],
-                          [0, u'end', 0.0],
-                          [0, u'', 1.1],
-                          [1, u'', 0.0]]
-        newdata2_values = [[1, u'text', 1.1]]
+        newdata_values = [[0, '', 0.0],
+                          [0, '', 0.0],
+                          [0, 'end', 0.0],
+                          [0, '', 1.1],
+                          [1, '', 0.0]]
+        newdata2_values = [[1, 'text', 1.1]]
 
         # get data from krysa table
         ndv = []
         for d in app.root.tables[0][1].rv.data:
-            if 'c' in d.keys():
+            if 'c' in list(d.keys()):
                 if d['type'] == int:
                     ndv.append(int(d['text']))
                 elif d['type'] == float:
@@ -144,7 +144,7 @@ class Test(unittest.TestCase):
 
         ndv2 = []
         for d in app.root.tables[1][1].rv.data:
-            if 'c' in d.keys():
+            if 'c' in list(d.keys()):
                 if d['type'] == int:
                     ndv2.append(int(d['text']))
                 elif d['type'] == float:

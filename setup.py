@@ -20,7 +20,7 @@ if 'sdist' in sys.argv:
             rem_files.append(op.join(path, file))
     for file in rem_files:
         if '.pyc' in file:
-            print('Removing {}'.format(file))
+            print(('Removing {}'.format(file)))
             os.remove(file)
 
 # get version from main

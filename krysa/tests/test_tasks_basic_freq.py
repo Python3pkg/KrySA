@@ -37,7 +37,7 @@ class Test(unittest.TestCase):
         cols = new_data.ids.columns.children
 
         # set columns for new data
-        range_vals = range(1, 31)
+        range_vals = list(range(1, 31))
         new_data.ids.columnadd.dispatch('on_release')
         cols[0].ids.colname.text += str(len(cols))
         cols[0].ids.coltype.text = 'INTEGER'

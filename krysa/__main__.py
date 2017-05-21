@@ -1,2 +1,2 @@
-from main import KrySA
+from .main import KrySA
 KrySA().run()

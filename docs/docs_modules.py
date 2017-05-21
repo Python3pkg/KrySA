@@ -3,7 +3,7 @@ import os
 import sys
 import os.path as op
 
-print('Creating modules from {}'.format(op.basename(__file__)))
+print(('Creating modules from {}'.format(op.basename(__file__))))
 include_exts = ('.py',)
 exclude_dirs = ('test_Project',)
 exclude_files = ('dropdown.py', '__main__.py', 'test_file_', 'test_tasks_')
@@ -22,7 +22,7 @@ for path, folders, files in os.walk(rootdir):
             sys.path.insert(0, path)
             paths.append(path)
 
-print('Getting files... {}'.format(include_exts))
+print(('Getting files... {}'.format(include_exts)))
 docs = []
 for p in paths:
     for path, folders, files in os.walk(p):

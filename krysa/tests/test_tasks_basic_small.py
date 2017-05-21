@@ -38,7 +38,7 @@ class Test(unittest.TestCase):
         cols = new_data.ids.columns.children
 
         # set columns for new data
-        range_vals = range(13)
+        range_vals = list(range(13))
         for _ in range(2):
             new_data.ids.columnadd.dispatch('on_release')
             cols[0].ids.colname.text += str(len(cols))

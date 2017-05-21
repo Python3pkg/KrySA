@@ -372,19 +372,19 @@ class Basic(object):
         right.insert(0, 'Upper edge')
 
         if absol and not relat and not cumul:
-            zipped = zip(left, right, absol)
+            zipped = list(zip(left, right, absol))
         elif absol and relat and not cumul:
-            zipped = zip(left, right, absol, relat)
+            zipped = list(zip(left, right, absol, relat))
         elif absol and cumul and not relat:
-            zipped = zip(left, right, absol, cumul)
+            zipped = list(zip(left, right, absol, cumul))
         elif relat and not absol and not cumul:
-            zipped = zip(left, right, relat)
+            zipped = list(zip(left, right, relat))
         elif relat and cumul and not absol:
-            zipped = zip(left, right, relat, cumul)
+            zipped = list(zip(left, right, relat, cumul))
         elif cumul and not absol and not relat:
-            zipped = zip(left, right, cumul)
+            zipped = list(zip(left, right, cumul))
         elif absol and relat and cumul:
-            zipped = zip(left, right, absol, relat, cumul)
+            zipped = list(zip(left, right, absol, relat, cumul))
 
         result = [r for items in zipped for r in items]
         bin_type = binstr.text if 'Calc' in bin_type else bin_type

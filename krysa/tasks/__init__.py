@@ -82,7 +82,7 @@ class FloatInput(TextInput):
                 chars = re.findall(r'([0-9])', substring)
         else:
             chars = re.findall(r'([\-0-9.])', substring)
-        return u''.join(chars)
+        return ''.join(chars)
 
 
 class FreqLayout(BoxLayout):

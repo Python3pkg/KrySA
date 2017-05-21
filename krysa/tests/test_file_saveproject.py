@@ -77,24 +77,24 @@ class Test(unittest.TestCase):
         new_data = app.root.wiz_newdata.run()
 
         # set testing data
-        newdata_values = [[0, u'', 0.0],
-                          [0, u'', 0.0],
-                          [0, u'end', 0.0],
-                          [0, u'', 1.1],
-                          [1, u'', 0.0]]
+        newdata_values = [[0, '', 0.0],
+                          [0, '', 0.0],
+                          [0, 'end', 0.0],
+                          [0, '', 1.1],
+                          [1, '', 0.0]]
 
         # get data from krysa table
         end_pos = None
         ndv = []
         for d in app.root.tables[0][1].rv.data:
-            if 'c' in d.keys():
+            if 'c' in list(d.keys()):
                 if d['type'] == int:
                     ndv.append(int(d['text']))
                 elif d['type'] == float:
                     ndv.append(float(d['text']))
                 else:
                     ndv.append(d['text'])
-            if not end_pos and d['text'] == u'end':
+            if not end_pos and d['text'] == 'end':
                 end_pos = app.root.tables[0][1].rv.data.index(d)
         ndv = [ndv[x:x + 3] for x in range(0, len(ndv), 3)]
         self.assertEqual(len(app.root.tables), 1)
@@ -120,11 +120,11 @@ class Test(unittest.TestCase):
             print(v)
 
         # change value in table
-        app.root.tables[0][1].rv.data[end_pos]['text'] = u'new_end'
-        ndv[2][1] = u'new_end'
-        newdata_values[2][1] = u'new_end'
+        app.root.tables[0][1].rv.data[end_pos]['text'] = 'new_end'
+        ndv[2][1] = 'new_end'
+        newdata_values[2][1] = 'new_end'
         app.root._save_project()
-        print(app.project_dir, app.project_exists)
+        print((app.project_dir, app.project_exists))
         # test new data
         conn = sqlite3.connect(op.join(data, 'data.sqlite'))
         c = conn.cursor()

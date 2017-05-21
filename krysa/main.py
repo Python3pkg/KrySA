@@ -27,7 +27,7 @@ from time import gmtime, strftime
 from kivy.app import App
 from kivy.metrics import dp
 from kivy.clock import Clock
-from dropdown import DropDown
+from .dropdown import DropDown
 from kivy.logger import Logger
 from kivy.uix.popup import Popup
 from kivy.uix.image import Image
@@ -54,12 +54,12 @@ from kivy.properties import (
 )
 
 # KrySA packages
-import utils
-from tasks import Task
-from tasks.basic import Basic
-from tasks.avgs import Avgs
-from tasks.manipulate import Manipulate
-from tasks.plot import Plot
+from . import utils
+from .tasks import Task
+from .tasks.basic import Basic
+from .tasks.avgs import Avgs
+from .tasks.manipulate import Manipulate
+from .tasks.plot import Plot
 
 
 class ResultGrid(GridLayout):
@@ -369,7 +369,7 @@ class Table(ScrollView):
             for c in range(self.cols):
                 if r == 0:
                     if c == 0:
-                        self.rv.data.append({'text': u'', 'disabled': True,
+                        self.rv.data.append({'text': '', 'disabled': True,
                                              'size': self.number_size,
                                              'origin': self.rv})
                     else:
@@ -379,7 +379,7 @@ class Table(ScrollView):
                                 '_text': self.labels[c - 1],
                                 'disabled': True,
                                 'cell': 'label' + str(c - 1),
-                                'type': type(u''),
+                                'type': type(''),
                                 'size': self.default_size,
                                 'origin': self.rv
                             }
@@ -440,7 +440,7 @@ class Table(ScrollView):
         letters = [chr(letter + 65) for letter in range(26)]
         result = []
         label = []
-        cols = range(self.cols + 1)
+        cols = list(range(self.cols + 1))
         for i in cols:
             if i != 0:
                 while i:
@@ -563,7 +563,7 @@ class ProcessFlow(FloatLayout, StencilView):
         '''
         mainitem = ProcessFlowMain
         sep = ProcessFlowSep
-        if 'mainitems' in self.boxes.keys():
+        if 'mainitems' in list(self.boxes.keys()):
             sep_pos = [dp(66), self.boxes['mainitems'][-1][1] - dp(132)]
             pos = [dp(50), self.boxes['mainitems'][-1][1] - dp(264), name]
             sep_height = sep_pos[1] - pos[1] - dp(8)
@@ -608,7 +608,7 @@ class ProcessFlow(FloatLayout, StencilView):
                 parent_pos, parent = p[:2], p[2]
         subitems = '{}-subitems'.format(parent)
 
-        if subitems in self.boxes.keys():
+        if subitems in list(self.boxes.keys()):
             sep_pos = [self.boxes[subitems][-1][0] + dp(100),
                        self.boxes[subitems][-1][1] + dp(16)]
             pos = [self.boxes[subitems][-1][0] + dp(200),
@@ -825,7 +825,7 @@ class Body(FloatLayout):
                     elif types[j] == 'REAL':
                         values.append(0.0)
                     else:
-                        values.append(u'')
+                        values.append('')
 
         self.tables.append((table_name, Table(max_cols=max_cols,
                                               max_rows=max_rows, pos=self.pos,
@@ -968,7 +968,7 @@ class Body(FloatLayout):
 
         # (dummy for now)
         # dump widgets' properties from process flow to dict, then to json
-        project = {u'test': u'blah'}
+        project = {'test': 'blah'}
         with open(op.join(selection, fname), 'w', encoding='utf8') as f:
             dump = json.dumps(project, indent=4)
             try:
@@ -1509,12 +1509,12 @@ class Body(FloatLayout):
     @staticmethod
     def simple_chars(substring, from_undo):
         chars = re.findall(r'([a-zA-Z0-9.])', substring)
-        return u''.join(chars)
+        return ''.join(chars)
 
     @staticmethod
     def address_chars(substring, from_undo):
         chars = re.findall(r'([a-zA-Z0-9:])', substring)
-        return u''.join(chars)
+        return ''.join(chars)
 
     def update_tree(self, dt):
         tree = self.ids.tree

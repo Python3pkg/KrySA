@@ -48,7 +48,7 @@ class Manipulate(object):
         tabletab = TabbedPanelItem(text=table)
         task.app.root.ids.tabpanel.add_widget(tabletab)
 
-        values = zip(*values)
+        values = list(zip(*values))
         values = [v for vals in values for v in vals]
         task.app.root.tables.append((
             table, task.tablecls(max_cols=cols, max_rows=rows,
@@ -122,7 +122,7 @@ class Manipulate(object):
                 elif _type == 'REAL':
                     chunks.extend([[0.0 for _ in range(rows)]])
                 else:
-                    chunks.extend([[u'' for _ in range(rows)]])
+                    chunks.extend([['' for _ in range(rows)]])
                 amount += 1
                 cols += 1
 
@@ -136,13 +136,13 @@ class Manipulate(object):
                     elif isinstance(chunk[0], float):
                         chunk.append(0.0)
                     else:
-                        chunk.append(u'')
+                        chunk.append('')
 
             # increase row count by new rows
             rows += amount
 
         # zip chunks to values, flatten values
-        values = zip(*chunks)
+        values = list(zip(*chunks))
         values = [v for vals in values for v in vals]
 
         # add Table
@@ -164,9 +164,9 @@ class Manipulate(object):
         else:
             # if space in name, sql save boom
             if append_type == 'Columns':
-                table += u'_append_{}_cols'.format(str(amount))
+                table += '_append_{}_cols'.format(str(amount))
             elif append_type == 'Rows':
-                table += u'_append_{}_rows'.format(str(amount))
+                table += '_append_{}_rows'.format(str(amount))
             tabletab = TabbedPanelItem(text=table)
             tabpanel.add_widget(tabletab, 0)
 
